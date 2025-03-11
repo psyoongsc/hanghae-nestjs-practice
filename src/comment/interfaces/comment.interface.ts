@@ -1,5 +1,5 @@
 export interface Comment {
-    postingId?: number;
+    postingId?: string;
     author?: string;
     context?: string;
     createdAt?: Date;
