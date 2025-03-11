@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/mongoose';
+import { Connection } from 'mongoose';
 import { Posting } from './interfaces/posting.interface'
 
 @Injectable()
 export class PostingService {
+    constructor(@InjectConnection('postings') private connection: Connection) {}
     private postings: Posting[] = [];
     private len: number = 0;
 
