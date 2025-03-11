@@ -15,7 +15,7 @@ export class PostingController {
     }
 
     @Get(':id')
-    getPostingById(@Param('id') id: number): Promise<Posting[]> {
+    getPostingById(@Param('id') id: string): Promise<Posting[]> {
         return this.postingService.getPostingById(id);
     }
 
@@ -25,12 +25,12 @@ export class PostingController {
     }
 
     @Post('update/:id')
-    updatePosting(@Param('id') id: number, @Body() updatePostingDto: UpdatePostingDto): Promise<Posting> {
+    updatePosting(@Param('id') id: string, @Body() updatePostingDto: UpdatePostingDto): Promise<Posting> {
         return this.postingService.updatePosting(id, updatePostingDto);
     }
 
     @Post('remove/:id')
-    removePosting(@Param('id') id: number, @Body() removePostingDto: RemovePostingDto): Promise<Posting> {
+    removePosting(@Param('id') id: string, @Body() removePostingDto: RemovePostingDto): Promise<Posting> {
         return this.postingService.removePosting(id, removePostingDto);
     }
     

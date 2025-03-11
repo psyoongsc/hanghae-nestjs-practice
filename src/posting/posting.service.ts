@@ -18,11 +18,11 @@ export class PostingService {
         return this.postingModel.find().exec();
     }
 
-    getPostingById(id: number): Promise<Posting[]> {
+    getPostingById(id: string): Promise<Posting[]> {
         return this.postingModel.find({_id: id}).exec();
     }
 
-    updatePosting(id: number, posting: Posting): Promise<Posting> {
+    updatePosting(id: string, posting: Posting): Promise<Posting> {
         return this.postingModel.findOneAndUpdate({_id: id, password: posting.password}, {
             title: posting.title,
             context: posting.context
@@ -30,7 +30,7 @@ export class PostingService {
 
     }
 
-    removePosting(id: number, posting: Posting): Promise<Posting> {
+    removePosting(id: string, posting: Posting): Promise<Posting> {
         return this.postingModel.findOneAndDelete({_id: id, password: posting.password})
         .exec().then();
     }
