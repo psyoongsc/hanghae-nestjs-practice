@@ -3,6 +3,7 @@ import { Posting } from './interfaces/posting.interface';
 import { PostingService } from './posting.service';
 import { CreatePostingDto } from './dto/create-posting.dto';
 import { UpdatePostingDto } from './dto/update-posting.dto';
+import { RemovePostingDto } from './dto/remove-posting.dto';
 
 @Controller('posting')
 export class PostingController {
@@ -27,4 +28,10 @@ export class PostingController {
     updatePosting(@Param('id') id: number, @Body() updatePostingDto: UpdatePostingDto): Posting | undefined {
         return this.postingService.updatePosting(id, updatePostingDto);
     }
+
+    @Post('remove/:id')
+    removePosting(@Param('id') id: number, @Body() removePostingDto: RemovePostingDto): Posting | undefined {
+        return this.postingService.removePosting(id, removePostingDto);
+    }
+    
 }
