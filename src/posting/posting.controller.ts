@@ -14,6 +14,12 @@ export class PostingController {
         return this.postingService.getAllPostings();
     }
 
+    // mongo
+    @Get('/all-mongo')
+    getAllPostingsMongo(): Promise<Posting[]> {
+        return this.postingService.getAllPostingsMongo();
+    }
+
     @Get(':id')
     getPostingById(@Param('id') id: number): Posting | undefined {
         return this.postingService.getPostingById(id);
@@ -22,6 +28,11 @@ export class PostingController {
     @Post('create')
     createPosting(@Body() createPostingDto: CreatePostingDto): Posting {
         return this.postingService.createPosting(createPostingDto);
+    }
+
+    @Post('create-mongo')
+    createPostingMongo(@Body() createPostingDto: CreatePostingDto): Promise<Posting> {
+        return this.postingService.createPostingMongo(createPostingDto);
     }
 
     @Post('update/:id')
