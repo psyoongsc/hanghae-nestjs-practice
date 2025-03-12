@@ -11,7 +11,6 @@ export class CommentService {
         return this.commentModel.find({ postingId: postingId }).sort({ createdAt: -1 }).exec();
     }
 
-    createComment(postingId: string, comment: Comment): Promise<Comment> {
     createComment(postingId: string, comment: Comment): Promise<Comment> | string {
         if(comment.context?.trim() == "") {
             return "댓글 내용을 입력해주세요";
@@ -24,18 +23,17 @@ export class CommentService {
         return createdComment.save();
     }
 
-    updateComment(id: string, comment: Comment): Promise<Comment> {
-        return this.commentModel.findOneAndUpdate({ id: id, author: comment.author }, {
-            comment: comment.context
     updateComment(id: string, comment: Comment): Promise<Comment> | string {
         if(comment.context?.trim() == "") {
             return "댓글 내용을 입력해주세요";
         }
 
+        return this.commentModel.findOneAndUpdate({ _id: id, author: comment.author }, {
+            context: comment.context
         }).exec().then();
     }
 
     removeComment(id: string, comment: Comment): Promise<Comment> {
-        return this.commentModel.deleteOne({ id: id, author: comment.author }).exec().then();
+        return this.commentModel.deleteOne({ _id: id, author: comment.author }).exec().then();
     }
 }
