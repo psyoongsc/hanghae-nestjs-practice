@@ -8,7 +8,7 @@ export class CommentService {
     constructor(@InjectModel('Comment') private readonly commentModel: Model<Comment>) {}
 
     getAllComments(postingId: string): Promise<Comment[]> {
-        return this.commentModel.find({ postingId: postingId }).exec();
+        return this.commentModel.find({ postingId: postingId }).sort({ createdAt: -1 }).exec();
     }
 
     createComment(postingId: string, comment: Comment): Promise<Comment> {

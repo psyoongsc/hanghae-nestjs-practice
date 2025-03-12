@@ -15,7 +15,7 @@ export class PostingService {
     }
 
     getAllPostings(): Promise<Posting[]> {
-        return this.postingModel.find().exec();
+        return this.postingModel.find().sort({postedDatetime: -1}).exec();
     }
 
     getPostingById(id: string): Promise<Posting[]> {
