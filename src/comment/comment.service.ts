@@ -12,6 +12,11 @@ export class CommentService {
     }
 
     createComment(postingId: string, comment: Comment): Promise<Comment> {
+    createComment(postingId: string, comment: Comment): Promise<Comment> | string {
+        if(comment.context?.trim() == "") {
+            return "댓글 내용을 입력해주세요";
+        }
+
         comment.postingId = postingId;
         comment.createdAt = new Date();
 
@@ -22,6 +27,11 @@ export class CommentService {
     updateComment(id: string, comment: Comment): Promise<Comment> {
         return this.commentModel.findOneAndUpdate({ id: id, author: comment.author }, {
             comment: comment.context
+    updateComment(id: string, comment: Comment): Promise<Comment> | string {
+        if(comment.context?.trim() == "") {
+            return "댓글 내용을 입력해주세요";
+        }
+
         }).exec().then();
     }
 

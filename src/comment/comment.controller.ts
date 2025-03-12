@@ -15,12 +15,12 @@ export class CommentController {
     }
 
     @Post('create/:postingId')
-    createComment(@Param('postingId') postingId: string, @Body() createCommentDto: CreateCommentDto): Promise<Comment> {
+    createComment(@Param('postingId') postingId: string, @Body() createCommentDto: CreateCommentDto): Promise<Comment> | string {
         return this.commentService.createComment(postingId, createCommentDto);
     }
 
     @Post('update/:id')
-    updateComment(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto): Promise<Comment> {
+    updateComment(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto): Promise<Comment> | string {
         return this.commentService.updateComment(id, updateCommentDto);
     }
 
