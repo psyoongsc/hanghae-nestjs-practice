@@ -13,7 +13,7 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async login(loginDto: LoginDto, res: any): Promise<void> {
+    async login(loginDto: LoginDto): Promise<{ token: string }> {
         const { nickname, password } = loginDto;
 
         const user = await this.userModel.findOne({ nickname });
@@ -28,15 +28,9 @@ export class AuthService {
         }
 
         const payload = { nickname: user.nickname, sub: user._id };
-        const token = this.jwtService.sign(payload);
+        const token = await this.jwtService.sign(payload);
 
-        res.cookie('Authorization', `Bearer ${token}`, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'strict',
-        });
-
-        res.status(200).send({ message: '로그인 성공!' });
+        return { token: token };
     }
 
 }
