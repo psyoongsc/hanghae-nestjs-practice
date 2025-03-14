@@ -1,6 +1,6 @@
 export class CreatePostingDto {
     title: string;
     context: string;
-    author: string;
+    nickname: string;
     password: string;
 }
