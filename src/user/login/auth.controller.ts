@@ -10,7 +10,7 @@ export class AuthController {
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const token = await this.authService.login(loginDto);
-    res.cookie('Authorization', `Bearer ${token.token}`, {
+    res.cookie('Authorization', `Bearer ${token.access_token}`, {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',

@@ -8,9 +8,13 @@ import { SignupModule } from './user/signup/signup.module';
 import { HttpToHttpsMiddleware } from './middleware/http-to-https.middleware';
 import { AuthModule } from './user/login/auth.module';
 import * as cookieParser from 'cookie-parser';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseModule.forRoot('mongodb://localhost/postings'),
     PostingModule, 
     CommentModule,
