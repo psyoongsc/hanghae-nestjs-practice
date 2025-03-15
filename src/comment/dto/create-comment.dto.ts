@@ -1,4 +1,4 @@
 export class CreateCommentDto {
-    author: string;
+    nickname: string;
     context: string;
 }

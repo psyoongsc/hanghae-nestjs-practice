@@ -1,4 +1,4 @@
 export class UpdateCommentDto {
-    author: string;
+    nickname: string;
     context: string;
 }

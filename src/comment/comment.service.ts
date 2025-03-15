@@ -28,12 +28,12 @@ export class CommentService {
             return "댓글 내용을 입력해주세요";
         }
 
-        return this.commentModel.findOneAndUpdate({ _id: id, author: comment.author }, {
+        return this.commentModel.findOneAndUpdate({ _id: id, author: comment.nickname }, {
             context: comment.context
         }).exec().then();
     }
 
     removeComment(id: string, comment: Comment): Promise<Comment> {
-        return this.commentModel.deleteOne({ _id: id, author: comment.author }).exec().then();
+        return this.commentModel.deleteOne({ _id: id, author: comment.nickname }).exec().then();
     }
 }
