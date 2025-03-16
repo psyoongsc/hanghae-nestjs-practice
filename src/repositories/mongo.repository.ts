@@ -1,7 +1,8 @@
 import { Model } from "mongoose";
 import { BaseEntity } from "src/entities/base.entity";
+import { BaseRepository } from "./base.repository";
 
-export class MongoRepository<T extends BaseEntity> {
+export class MongoRepository<T extends BaseEntity> implements BaseRepository<T> {
     constructor(private readonly model: Model<T>) {}
 
     create(data: T, callback: (data: T) => void): Promise<T> {
@@ -22,7 +23,7 @@ export class MongoRepository<T extends BaseEntity> {
             .exec().then();
     }
 
-    remove(id: string, data: T, callback: (id: string, data: T) => {}): Promise<T> {
+    delete(id: string, data: T, callback: (id: string, data: T) => {}): Promise<T> {
         const condition = callback(id, data);
 
         return this.model
@@ -31,7 +32,7 @@ export class MongoRepository<T extends BaseEntity> {
             .exec().then();
     }
 
-    getAll(findCondition: {}, sortCondition: {}): Promise<T[]> {
+    findAll(findCondition: {}, sortCondition: {}): Promise<T[]> {
         return this.model
             .find({deletedAt: {$gt: new Date()}})
             .find(findCondition)
@@ -39,7 +40,7 @@ export class MongoRepository<T extends BaseEntity> {
             .exec();
     }
 
-    getById(id: string): Promise<T> {
+    findById(id: string): Promise<T> {
         return this.model
             .findOne({_id: id, deletedAt: {$gt: new Date()}})
             .exec().then();
